@@ -1,2 +1,2 @@
 # TextEditorSQLite
-![Untitled Diagram](https://user-images.githubusercontent.com/67684747/86536982-87ed6080-bef4-11ea-80bf-fe0aa3c590ec.png)
+![TextEditorSQLite_ClassDiagramV0 0 2](https://user-images.githubusercontent.com/67684747/86753560-d4e24b80-c048-11ea-9838-11cf4413aa7e.png)
