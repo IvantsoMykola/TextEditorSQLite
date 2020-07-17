@@ -1,0 +1,72 @@
+﻿<Window x:Class="TextEditorSQLite.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextEditorSQLite.ViewModels"
+        xmlns:models="clr-namespace:TextEditorSQLite.Models"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1280">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+
+        <DataTemplate x:Key="templateForTheContent" DataType="{x:Type models:TextFile}">
+            <TextBox AcceptsReturn="True"
+                     AcceptsTab="True"
+                     Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalScrollBarVisibility="Auto"
+                     VerticalScrollBarVisibility="Auto"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="templateForTheHeader" DataType="{x:Type models:TextFile}">
+            <StackPanel>
+                <TextBlock Text="{Binding FullTitle, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </DataTemplate>
+
+    </Window.Resources>
+    <Grid>
+        <DockPanel LastChildFill="True">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem Header="New file" Command="{Binding NewFileCommand}"/>
+                    <MenuItem Header="Open file"/>
+                    <MenuItem Header="Save file"/>
+                    <MenuItem Header="Import file"/>
+                    <MenuItem Header="Export file"/>
+                    <MenuItem Header="Delete file"/>
+                </MenuItem>
+                <MenuItem Header="Edit">
+                    <MenuItem Header="Undo" IsEnabled="False"/>
+                    <MenuItem Header="Redo" IsEnabled="False"/>
+                    <MenuItem Header="Find" IsEnabled="False"/>
+                    <MenuItem Header="Find and replace" IsEnabled="False"/>
+                    <MenuItem Header="Select All" IsEnabled="False"/>
+                </MenuItem>
+                <MenuItem Header="Format">
+                    <MenuItem Header="Font style" IsEnabled="False"/>
+                    <MenuItem Header="Font size" IsEnabled="False"/>
+                </MenuItem>
+                <MenuItem Header="View">
+                    <MenuItem Header="Soon" IsEnabled="False"/>
+                </MenuItem>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <TextBlock Text="Help"/>
+                    </MenuItem.Header>
+                </MenuItem>
+            </Menu>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Background="AliceBlue" Height="25">
+                <TextBlock VerticalAlignment="Center" Text="Line:" Margin="20,0"/>
+                <TextBlock VerticalAlignment="Center" Text="Col:" Margin="20,0"/>
+                <TextBlock VerticalAlignment="Center" Text="Total sym:" Margin="20,0"/>
+            </StackPanel>
+            <TabControl ItemsSource="{Binding CurrentFiles}"
+                        ContentTemplate="{StaticResource templateForTheContent}"
+                        ItemTemplate="{StaticResource templateForTheHeader}">
+                </TabControl>
+        </DockPanel>
+    </Grid>
+</Window>
